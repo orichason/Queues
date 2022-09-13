@@ -20,22 +20,46 @@ namespace Queues
         {
             T[] newArray = new T[data.Length * 2];
 
-            for (int i = 0; i < newArray.Length; i++)
+            for (int i = 0; i < data.Length; i++)
             {
-                newArray[i] = data[i];
+                int current = (i + head) % data.Length;
+                newArray[i] = data[current];
             }
+            head = 0;
+            tail = data.Length;
 
             data = newArray;
         }
 
         public void Enqueue(T value)
         {
-            Count++;
-            data[tail] = value;
-            if(Count > data.Length)
+            if (!IsEmpty() && tail == head)
             {
-
+                Resize();
             }
+
+            data[tail] = value;
+            tail = (tail + 1) % data.Length;
+            Count++;
+        }
+
+        public T Dequeue ()
+        {
+            if(IsEmpty())
+            {
+                throw new InvalidOperationException("fuck off");
+            }
+            T headData = data[head];
+
+            head = (head + 1) % data.Length;
+            Count--;
+
+            return headData;
+        }
+
+        public bool IsEmpty()
+        {
+            return Count == 0;
         }
     }
 }

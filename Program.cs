@@ -6,18 +6,33 @@ namespace Queues
     {
         static void Main(string[] args)
         {
-            LinkedQueue<int> LinkedList = new LinkedQueue<int>();
+            LinkedQueue<int> linkedList = new LinkedQueue<int>();
 
-            LinkedList.Enqueue(40);
-            LinkedList.Enqueue(10);
-            LinkedList.Enqueue(80);
-            LinkedList.Enqueue(60);
+            ArrayQueue<int> arrayQueue = new ArrayQueue<int>();
 
-            LinkedList.Dequeue();
-            LinkedList.Dequeue();
+            arrayQueue.Enqueue(10);
+            arrayQueue.Enqueue(15);
+            arrayQueue.Enqueue(20);
 
-            int peek = LinkedList.Peek();
+            Deque(arrayQueue, 2);
+
+            arrayQueue.Enqueue(30);
+            arrayQueue.Enqueue(90);
+            arrayQueue.Enqueue(87);
+
+            arrayQueue.Enqueue(10);
+            arrayQueue.Enqueue(15);
+            arrayQueue.Enqueue(20);
+
             ;
+        }
+
+        public static void Deque<T>(ArrayQueue<T> queue, int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                Console.WriteLine(queue.Dequeue());
+            }
         }
     }
 }
